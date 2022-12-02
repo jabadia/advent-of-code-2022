@@ -1,5 +1,5 @@
+from utils.fetch_input import fetch_input
 from utils.test_case import TestCase
-from d1_input import INPUT
 
 TEST_CASES = [
     TestCase("""
@@ -30,8 +30,9 @@ def solve(input):
 
 
 if __name__ == '__main__':
+    input = fetch_input()
     for case in TEST_CASES:
         result = solve(case.case)
         case.check(result)
 
-    print(solve(INPUT))
+    print(solve(input))
