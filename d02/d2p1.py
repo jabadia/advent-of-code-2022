@@ -9,25 +9,15 @@ C Z
 """, 15),
 ]
 
-SCORES = {
-    'X': 1,
-    'Y': 2,
-    'Z': 3,
-}
-
-OUTCOMES = {
-    'A': {'X': 3, 'Y': 6, 'Z': 0},  # rock
-    'B': {'X': 0, 'Y': 3, 'Z': 6},  # paper
-    'C': {'X': 6, 'Y': 0, 'Z': 3},  # scissors
-}
-
 
 def solve(input):
     rounds = input.strip().split('\n')
     score = 0
     for round in rounds:
         their_selection, my_selection = round.split(' ')
-        score += SCORES[my_selection] + OUTCOMES[their_selection][my_selection]
+        their_selection = ord(their_selection) - ord('A')
+        my_selection = ord(my_selection) - ord('X')
+        score += (my_selection + 1) + (my_selection - their_selection) % 3 * 3
     return score
 
 

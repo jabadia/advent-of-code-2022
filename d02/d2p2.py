@@ -9,32 +9,16 @@ C Z
 """, 12),
 ]
 
-SCORES = {
-    'X': 1,
-    'Y': 2,
-    'Z': 3,
-}
-
-MY_SELECTION = {
-    'X': {'A': 'Z', 'B': 'X', 'C': 'Y'},  # lose
-    'Y': {'A': 'X', 'B': 'Y', 'C': 'Z'},  # draw
-    'Z': {'A': 'Y', 'B': 'Z', 'C': 'X'},  # win
-}
-
-OUTCOMES = {
-    'A': {'X': 3, 'Y': 6, 'Z': 0},  # rock
-    'B': {'X': 0, 'Y': 3, 'Z': 6},  # paper
-    'C': {'X': 6, 'Y': 0, 'Z': 3},  # scissors
-}
-
 
 def solve(input):
     rounds = input.strip().split('\n')
     score = 0
     for round in rounds:
         their_selection, desired_result = round.split(' ')
-        my_selection = MY_SELECTION[desired_result][their_selection]
-        score += SCORES[my_selection] + OUTCOMES[their_selection][my_selection]
+
+        their_selection = ord(their_selection) - ord('A')
+        desired_result = ord(desired_result) - ord('X')
+        score += ((their_selection + desired_result + 2) % 3 + 1) + desired_result * 3
     return score
 
 
