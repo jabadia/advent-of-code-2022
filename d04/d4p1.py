@@ -14,7 +14,7 @@ TEST_CASES = [
 
 
 def is_fully_contained(r0, r1, p0, p1):
-    return r0 <= p0 and p1 <= r1
+    return (r0 <= p0 and p1 <= r1) or (p0 <= r0 and r1 <= p1)
 
 
 def solve(input):
@@ -23,7 +23,7 @@ def solve(input):
         elf1, elf2 = pair.split(',')
         r0, r1 = map(int, elf1.split('-'))
         p0, p1 = map(int, elf2.split('-'))
-        if is_fully_contained(r0,r1,p0,p1) or is_fully_contained(p0,p1,r0,r1):
+        if is_fully_contained(r0, r1, p0, p1):
             count += 1
     return count
 
