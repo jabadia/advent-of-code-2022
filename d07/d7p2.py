@@ -86,10 +86,8 @@ def solve(input):
     needed_space = used_space - total_space + required_space
 
     candidates = []
-    find_sizes(disk, candidates=candidates)
-    for candidate in sorted(candidates):
-        if candidate >= needed_space:
-            return candidate
+    find_sizes(disk, candidates)
+    return min(candidate for candidate in candidates if candidate >= needed_space)
 
 
 if __name__ == '__main__':
