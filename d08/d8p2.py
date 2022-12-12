@@ -14,41 +14,23 @@ TEST_CASES = [
 ]
 
 
+def find_visible(world, row, col, delta_row, delta_col):
+    i, j = row + delta_row, col + delta_col
+    visible = 0
+    while world[i][j] < world[row][col]:
+        visible += 1
+        i += delta_row
+        j += delta_col
+    if world[i][j] != 'Z':
+        visible += 1
+    return visible
+
+
 def scenic_score(world, row, col):
-    height = len(world)
-    width = len(world[0])
-
-    j = row - 1
-    up = 0
-    while world[j][col] < world[row][col]:
-        up += 1
-        j -= 1
-    if world[j][col] != 'Z':
-        up += 1
-
-    j = row + 1
-    down = 0
-    while world[j][col] < world[row][col]:
-        down += 1
-        j += 1
-    if world[j][col] != 'Z':
-        down += 1
-
-    i = col - 1
-    left = 0
-    while world[row][i] < world[row][col]:
-        left += 1
-        i -= 1
-    if world[row][i] != 'Z':
-        left += 1
-
-    i = col + 1
-    right = 0
-    while world[row][i] < world[row][col]:
-        right += 1
-        i += 1
-    if world[row][i] != 'Z':
-        right += 1
+    up = find_visible(world, row, col, -1, 0)
+    down = find_visible(world, row, col, 1, 0)
+    left = find_visible(world, row, col, 0, -1)
+    right = find_visible(world, row, col, 0, 1)
 
     return up * down * left * right
 
@@ -63,8 +45,8 @@ def solve(input):
 
     return max(
         scenic_score(world, row, col)
-        for row in range(1, height-1)
-        for col in range(1, width-1)
+        for row in range(1, height - 1)
+        for col in range(1, width - 1)
     )
 
 
