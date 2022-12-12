@@ -164,7 +164,6 @@ def draw_pixel(cycle, x, crt):
     position = (cycle-1) % 240
     row = position // 40
     col = position % 40
-    print(row, col, x)
     if x - 1 <= col <= x + 1:
         crt[row][col] = '#'
 
@@ -172,7 +171,7 @@ def draw_pixel(cycle, x, crt):
 def solve(input):
     x = 1
     cycle = 0
-    crt = [[' '] * 40 for _ in range(6)]
+    crt = [['.'] * 40 for _ in range(6)]
     for instruction in input.strip().split('\n'):
         if instruction == 'noop':
             cycle += 1

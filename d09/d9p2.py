@@ -74,6 +74,7 @@ def solve(input):
             # print_world(visited, knots)
             pass
 
+    print_world(visited, knots)
     return len(visited)
 
 
