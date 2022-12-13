@@ -33,9 +33,9 @@ def solve(input):
     width = len(world[0])
 
     visited = {start}
-    queue = [(start, [])]
+    queue = [(start, 0)]
     while queue:
-        current, path = queue.pop(0)
+        current, path_len = queue.pop(0)
         for neighbour in neighbours(current, height, width):
             if neighbour in visited:
                 continue
@@ -43,8 +43,8 @@ def solve(input):
             neighbour_height = ord(world[neighbour[0]][neighbour[1]])
             if neighbour_height <= my_height + 1:
                 if neighbour == goal:
-                    return len(path) + 1
-                queue.append((neighbour, path + [current]))
+                    return path_len + 1
+                queue.append((neighbour, path_len + 1))
                 visited.add(neighbour)
 
     return None
