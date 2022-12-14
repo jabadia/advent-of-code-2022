@@ -11,5 +11,7 @@ class TestCase(object):
     def check(self, actual):
         if self.expected == actual:
             print("OK %s %s" % (self.expected, self._format_case(self.case)))
+            return True
         else:
             print("FAIL expected %s, got %s, %s" % (self.expected, actual, self._format_case(self.case)))
+            return False
