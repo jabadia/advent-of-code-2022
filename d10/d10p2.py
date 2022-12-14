@@ -1,4 +1,5 @@
 from utils.fetch_input import fetch_input
+from utils.submit_answer import submit_answer
 from utils.test_case import TestCase
 
 TEST_CASES = [
@@ -171,7 +172,7 @@ def draw_pixel(cycle, x, crt):
 def solve(input):
     x = 1
     cycle = 0
-    crt = [['.'] * 40 for _ in range(6)]
+    crt = [[' '] * 40 for _ in range(6)]
     for instruction in input.strip().split('\n'):
         if instruction == 'noop':
             cycle += 1
@@ -194,4 +195,7 @@ if __name__ == '__main__':
         result = solve(case.case)
         case.check(result)
 
-    print(solve(input))
+    answer = solve(input)
+    print()
+    print(answer)
+    # submit_answer(answer)

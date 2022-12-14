@@ -1,4 +1,5 @@
 from utils.fetch_input import fetch_input
+from utils.submit_answer import submit_answer
 from utils.test_case import TestCase
 
 TEST_CASES = [
@@ -84,4 +85,6 @@ if __name__ == '__main__':
         result = solve(case.case)
         case.check(result)
 
-    print(solve(input))
+    answer = solve(input)
+    print(answer)
+    submit_answer(answer)

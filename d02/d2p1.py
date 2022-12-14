@@ -1,4 +1,5 @@
 from utils.fetch_input import fetch_input
+from utils.submit_answer import submit_answer
 from utils.test_case import TestCase
 
 TEST_CASES = [
@@ -10,14 +11,25 @@ C Z
 ]
 
 
+SCORES = {
+    'X': 1,
+    'Y': 2,
+    'Z': 3,
+}
+
+OUTCOMES = {
+    'A': {'X': 3, 'Y': 6, 'Z': 0},  # rock
+    'B': {'X': 0, 'Y': 3, 'Z': 6},  # paper
+    'C': {'X': 6, 'Y': 0, 'Z': 3},  # scissors
+}
+
+
 def solve(input):
     rounds = input.strip().split('\n')
     score = 0
     for round in rounds:
         their_selection, my_selection = round.split(' ')
-        their_selection = ord(their_selection) - ord('A')
-        my_selection = ord(my_selection) - ord('X')
-        score += (my_selection + 1) + (my_selection - their_selection) % 3 * 3
+        score += SCORES[my_selection] + OUTCOMES[their_selection][my_selection]
     return score
 
 
@@ -27,4 +39,6 @@ if __name__ == '__main__':
         result = solve(case.case)
         case.check(result)
 
-    print(solve(input))
+    answer = solve(input)
+    print(answer)
+    submit_answer(answer)
