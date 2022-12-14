@@ -30,23 +30,6 @@ TEST_CASES = [
 ]
 
 
-# def fix_types(first, second):
-#     if isinstance(first, list) != isinstance(second, list):
-#         if isinstance(first, list):
-#             return first, [second]
-#         else:
-#             return [first], second
-#     elif isinstance(first, list):
-#         new_first = []
-#         new_second = []
-#         for item1, item2 in zip(first, second):
-#             item1, item2 = fix_types(item1, item2)
-#             new_first.append(item1)
-#             new_second.append(item2)
-#         return new_first, new_second
-#     else:
-#         return first, second
-
 def compare(first, second):
     if isinstance(first, int) and isinstance(second, int):
         return first - second
