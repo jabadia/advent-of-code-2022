@@ -46,18 +46,22 @@ def solve(input):
         sensors[sensor] = sensor_dist
         beacons.add(beacon)
 
-    row = set()
+    row = [0] * row_y * 3
     for sensor, sensor_dist in sensors.items():
         projection = sensor[0], row_y
         covered = sensor_dist - dist(sensor, projection)
         if covered > 0:
             for x in range(sensor[0] - covered, sensor[0] + covered + 1):
-                row.add(x)
+                row[x] = 1
 
-    row -= set(x for x, y in beacons if y == row_y)
-    row -= set(x for x, y in sensors.keys() if y == row_y)
+    for x, y in beacons:
+        if y == row_y:
+            row[x] = 0
+    for x, y in sensors.keys():
+        if y == row_y:
+            row[x] = 0
 
-    return len(row)
+    return row.count(1)
 
 
 if __name__ == '__main__':
